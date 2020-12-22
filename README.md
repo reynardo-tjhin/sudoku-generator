@@ -1,6 +1,4 @@
-# Projects
+# Sudoku Random Generator
 Just putting in some random ideas
 
-Trying out new stuff,
-New to programming,
-Excited to make ideas into realities
+An almost bruteforce approach to create a random sudoku
