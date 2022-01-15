@@ -14,7 +14,7 @@ Files:
 - `check_sudoku.py`: This file is to check the correctness of the random sudoku
 - `get_difficulty.py`: This file generates an incomplete sudoku based on the difficulty level desired
 
-First Version: Bruteforce
+First Version: Bruteforce <br />
 Randomize the number in each position. If there is any error occured, handle it using try except.
 This version is very long and is difficult to maintain.
 
