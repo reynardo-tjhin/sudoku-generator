@@ -53,6 +53,7 @@ done
 
 # remove the temporary file
 rm temp.err
+rm temp.out
 
 # output
 echo "No of Errors:     $NO_OF_ERRORS out of $NO_OF_TESTS tests"
