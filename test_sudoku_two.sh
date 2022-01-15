@@ -11,18 +11,20 @@ TIME_TAKEN=0
 LONGEST=-10
 SHORTEST=10
 
-# to get error
+# to get error and output
 touch temp.err
+touch temp.out
 
 i=0
 while [ $i -lt $NO_OF_TESTS ]
 do
     # get the time taken to produce 1 random sudoku
-    TIME_TAKEN=$(time(python3 sudoku_generator_2.py 2> temp.err 1> /dev/null) 2> /dev/stdout)
-    printf "$(($i+1)): $TIME_TAKEN s\n"
+    TIME_TAKEN=$(time(python3 check_sudoku.py 2 2> temp.err 1> temp.out) 2> /dev/stdout)
+    CHECK=$(cat temp.out)
+    printf "$(($i+1)): $TIME_TAKEN s, $CHECK\n"
 
     # check for errors
-    if [ ! -z "$(cat temp.err)" ] # check if not empty
+    if [ ! -z "$(cat temp.err)" ] || [ "False" == "$CHECK" ] # check if not empty
     then
         echo "Error at No. $(($i+1)) test!"
         NO_OF_ERRORS=$(($NO_OF_ERRORS+1))
@@ -49,8 +51,9 @@ do
     fi
 done
 
-# remove the temporary file
+# remove the temporary files
 rm temp.err
+rm temp.out
 
 # output
 echo "No of Errors:     $NO_OF_ERRORS out of $NO_OF_TESTS tests"
