@@ -18,7 +18,7 @@ i=0
 while [ $i -lt $NO_OF_TESTS ]
 do
     # get the time taken to produce 1 random sudoku
-    TIME_TAKEN=$(time(python3 sudoku_generator.py 2> temp.err 1> /dev/null) 2> /dev/stdout)
+    TIME_TAKEN=$(time(python3 sudoku_generator_2.py 2> temp.err 1> /dev/null) 2> /dev/stdout)
     printf "$(($i+1)): $TIME_TAKEN s\n"
 
     # check for errors
