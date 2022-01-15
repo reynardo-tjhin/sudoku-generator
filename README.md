@@ -1,4 +1,6 @@
 # Sudoku Random Generator
-Just putting in some random ideas
+Creating a random 9x9 sudoku
+1. Using a bruteforce with exceptions approach
+2. Using Yate's Random Algorithm
 
-An almost bruteforce approach to create a random sudoku
+Details are explained in the files.
