@@ -4,7 +4,7 @@ Creating a random 9x9 sudoku
 Programs are purely created using Python Language.
 
 1. First Version:  Using a bruteforce with exceptions approach
-2. Second Version: Using Yate's Random Algorithm
+2. Second Version: Using Fisher-Yates' Random Algorithm
 
 Files:
 - `test_sudoku_one.sh`: This file is used to calculate the time for the first sudoku generator "sudoku_generator.py" to generate one sudoku. It is run by writing "./test_sudoku_one.sh". The file will generate average time taken, total time taken, shortest time and longest time, and also the number of sudokus that are failed to be generated.
@@ -15,6 +15,8 @@ Files:
 - `get_difficulty.py`: This file generates an incomplete sudoku based on the difficulty level desired
 
 First Version: Bruteforce
+Randomize the number in each position. If there is any error occured, handle it using try except.
+This version is very long and is difficult to maintain.
 
 Second Version: Modified Fisher-Yates' Algorithm
 - The algorithm is used to randomize the numbers within an array.
@@ -33,7 +35,7 @@ def FisherYates(A):
     return A
 ```
 
-- The second version of sudoku generator follows similarly to Fisher-Yates' Algorithm.
+- The second version of sudoku generator follows similarly to Fisher-Yates' Algorithm. <br />
 Firstly, we prepare a complete and randomized sudoku. <br />
 We then iterate every position in the sudoku from the very first row to last row. The order in each row is from the first column to the last column. <br />
 For every iteration, we choose which way to pick the number: within the 3x3 box, horizontal or vertical. <br />
@@ -63,4 +65,30 @@ we are looking at: <br />
 Hence, we will swap 2 and a random number below 2. <br />
 After we pick 2 numbers, we will go through the entire sudoku and swap all the numbers. <br />
 - The correctness of this algorithm
-
+The algorithm is correct because every time we swap 2 numbers, we have to swap the 2 numbers in the whole of sudoku. <br />
+This is because when we swap 2 numbers, the same numbers that are not swapped break the characteristic of the sudoku. <br />
+Hence, the same numbers must also be swapped. <br />
+This can be seen with an example of a 2x2 sudoku: <br />
+1 3 | 2 4 <br />
+4 2 | 3 1 <br />
+----+---- <br />
+3 4 | 1 2 <br />
+2 1 | 4 3 <br />
+When we swap 1 and 2, we will get <br />
+2 3 | 1 4 <br />
+4 2 | 3 1 <br />
+----+---- <br />
+3 4 | 1 2 <br />
+2 1 | 4 3 <br />
+However, the first box already contains a 2 in the second column. <br />
+The second box also contains two 1s. <br />
+Hence, we must swap the other 2 and 1. <br />
+This results into: <br />
+2 3 | 1 4 <br />
+4 1 | 3 2 <br />
+----+---- <br />
+3 4 | 2 1 <br />
+1 2 | 4 3 <br />
+And this follows the characteristics of sudoku. <br />
+2x2 sudoku is similar to 3x3 sudoku. Hence, we can argue in the same way. <br />
+The algorithm is argued to be correct. <br />
