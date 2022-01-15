@@ -1,16 +1,19 @@
 #!/bin/bash
 
-export TIMEFORMAT=%R # to output the real time
+# to output the real time
+export TIMEFORMAT=%R
 
 # variables
 NO_OF_TESTS=2
 NO_OF_ERRORS=0
 TOTAL_TIME=0
 TIME_TAKEN=0
-LONGEST=0
-SHORTEST=0
+LONGEST=-10
+SHORTEST=10
 
-touch temp.err # to get error
+# to get error
+touch temp.err
+
 i=0
 while [ $i -lt $NO_OF_TESTS ]
 do
@@ -34,10 +37,24 @@ do
     TOTAL_TIME=$(echo "scale=5; $TIME_TAKEN + $TOTAL_TIME" | bc)
 
     # compare longest
+    if [ 1 -eq $(echo "$LONGEST < $TIME_TAKEN" | bc) ]
+    then
+        LONGEST=$TIME_TAKEN
+    fi
+
     # compare shortest
-
+    if [ 1 -eq $(echo "$SHORTEST > $TIME_TAKEN" | bc) ]
+    then
+        SHORTEST=$TIME_TAKEN
+    fi
 done
-rm temp.err # remove the temporary file
 
-echo "No of Errors: $NO_OF_ERRORS out of $NO_OF_TESTS tests"
-echo "Total Time Taken: $TOTAL_TIME s"
+# remove the temporary file
+rm temp.err
+
+# output
+echo "No of Errors:     $NO_OF_ERRORS out of $NO_OF_TESTS tests"
+echo "Total Time Taken: $(echo $TOTAL_TIME)s"
+echo "Longest Time:     $(echo $LONGEST)s"
+echo "Shortest Time:    $(echo $SHORTEST)s"
+echo "Average Time:     $(echo "scale=5; $TOTAL_TIME / $i" | bc | awk '{printf "%f", $0}')s"
